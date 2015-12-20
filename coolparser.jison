@@ -3,8 +3,6 @@
 %}
 
 /*jison declaration*/
-%%
-/*
 %token INTEGER,
 %token IDENTIFIER
 %token TYPE
@@ -49,13 +47,12 @@
 %token NOT
 %token TRUE
 %token FALSE
-*/
+
 %%
 
 program 
                 : class_list
                 ;    
-/*
 class_list  
                 : class_list class SEMI
                 | class SEMI
@@ -64,6 +61,7 @@ class_list
 class       
                 : CLASS TYPE LBRACE feature_list RBRACE
                 | CLASS TYPE INHERITS TYPE LBRACE feature_list RBRACE
+                ;
                 
 feature_list    
                 : feature SEMI feature_list
@@ -73,6 +71,7 @@ feature
                 : IDENTIFIER LPAREN format_list RPAREN LBRACE expr RBRACE
                 | IDENTIFIER COLON TYPE 
                 | IDENTIFIER COLON TYPE LARROW expr
+                ;
 
 formal_list     
                 : formal formal_list
@@ -80,6 +79,7 @@ formal_list
                 ;
 formal
                 : IDENTIFIER COLON TYPE
+                ;
 
 expr            
                 : IDENTIFIER LARROW expr
@@ -110,6 +110,7 @@ expr
                 | STRING
                 | TRUE
                 | FALSE
+                ;
 
 declaration_list 
                 : declaration
@@ -130,5 +131,4 @@ case_list
                 |
                 ;    
 
-*/               
 %%
