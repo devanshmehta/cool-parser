@@ -3,7 +3,8 @@
 %}
 
 /*jison declaration*/
-%token INTEGER,
+
+%token INTEGER
 %token IDENTIFIER
 %token TYPE
 %token STRING
@@ -21,13 +22,11 @@
 %token LE
 %token LT
 %token GE
-%token GT,
+%token GT
 %token EQUALS
 %token LARROW
 %token RARROW
 %token TILDE
-%token DOT
-%token AT
 %token CLASS
 %token ELSE
 %token FI
@@ -47,15 +46,25 @@
 %token NOT
 %token TRUE
 %token FALSE
+%token DOT
+
+%left LARROW
+%left NOT
+%left LT LE EQUALS
+%left GT GE
+%left PLUS MINUS
+%left TIMES DIVIDE
+%nonassoc ISVOID
+%left TILDE
+%left AT
+%left DOT
 
 %%
-
 program 
-                : class_list
+                : class SEMI class_list
                 ;    
 class_list  
-                : class_list class SEMI
-                | class SEMI
+                : class SEMI class_list
                 | 
                 ;
 class       
