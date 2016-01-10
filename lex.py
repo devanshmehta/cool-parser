@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import argparse
 import logging
 import ply.lex as lex
@@ -67,11 +69,6 @@ tokens_to_print = {
     
 
 t_ignore = ' \t\f\r\v'
-
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--file', help = 'file from which to read')
-    return parser.parse_args()
 
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
@@ -157,6 +154,10 @@ def get_tokens_from_cin(lex):
             inp += '\n'
             lex.input(inp)
             print_tokens(lex)
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--file', help = 'file from which to read')
+    return parser.parse_args()
 
 def main():
     init_logger()
