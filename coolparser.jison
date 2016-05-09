@@ -77,7 +77,7 @@ feature_list
                 |
                 ;
 feature         
-                : IDENTIFIER LPAREN format_list RPAREN LBRACE expr RBRACE
+                : IDENTIFIER LPAREN formal_list RPAREN COLON TYPE LBRACE expr RBRACE
                 | IDENTIFIER COLON TYPE 
                 | IDENTIFIER COLON TYPE LARROW expr
                 ;
