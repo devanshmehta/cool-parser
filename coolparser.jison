@@ -91,10 +91,10 @@ formal
                 ;
 
 expr            
-                : IDENTIFIER LARROW expr
-                | expr DOT IDENTIFIER LPAREN expr_list RPAREN
-                | expr AT TYPE  DOT IDENTIFIER LPAREN expr_list RPAREN
-                | IDENTIFIER LPAREN expr_list RPAREN
+                : IDENTIFIER expr_identifier
+                | expr DOT IDENTIFIER LPAREN expr_comma RPAREN
+                | expr AT TYPE  DOT IDENTIFIER LPAREN expr_comma RPAREN
+                /*| IDENTIFIER LPAREN expr_comma RPAREN*/
                 | IF expr THEN expr ELSE expr FI
                 | WHILE expr LOOP expr POOL 
                 | LBRACE expr SEMI expr_list RBRACE
@@ -114,13 +114,57 @@ expr
                 | expr EQUALS expr
                 | NOT expr
                 | LPAREN expr RPAREN
-                | IDENTIFIER
+                /*| IDENTIFIER*/
                 | INTEGER
                 | STRING
                 | TRUE
                 | FALSE
                 ;
 
+
+
+/*
+expr        
+                : IDENTIFIER expr_identifier
+                | IF expr THEN expr ELSE expr FI
+                | WHILE expr LOOP expr POOL
+                | LBRACE expr_list RBRACE
+                | declaration
+                | CASE expr OF case_list ESAC
+                | ISVOID expr
+                | TILDE expr
+                | NOT expr
+                | LPAREN expr RPAREN
+                | NEW TYPE
+                | ID
+                | INTEGER
+                | STRING
+                | TRUE
+                | FALSE 
+                ;
+                
+ */                
+expr_list       
+                : expr SEMI expr
+                |
+                ;
+
+expr_identifier 
+                : LARROW expr
+                /*| LPAREN expr COMMA expr  RPAREN*/
+                | LPAREN expr_comma RPAREN
+                |
+                ;
+
+expr_comma
+                : expr comma_expr
+                |
+                ;
+
+comma_expr
+                : COMMA expr
+                |
+                ;
 declaration_list 
                 : declaration
                 | declaration COMMA declaration_list
