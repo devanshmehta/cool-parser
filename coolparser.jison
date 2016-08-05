@@ -94,7 +94,6 @@ expr
                 : IDENTIFIER expr_identifier
                 | expr DOT IDENTIFIER LPAREN expr_comma RPAREN
                 | expr AT TYPE  DOT IDENTIFIER LPAREN expr_comma RPAREN
-                /*| IDENTIFIER LPAREN expr_comma RPAREN*/
                 | IF expr THEN expr ELSE expr FI
                 | WHILE expr LOOP expr POOL 
                 | LBRACE expr SEMI expr_list RBRACE
@@ -114,36 +113,12 @@ expr
                 | expr EQUALS expr
                 | NOT expr
                 | LPAREN expr RPAREN
-                /*| IDENTIFIER*/
                 | INTEGER
                 | STRING
                 | TRUE
                 | FALSE
                 ;
 
-
-
-/*
-expr        
-                : IDENTIFIER expr_identifier
-                | IF expr THEN expr ELSE expr FI
-                | WHILE expr LOOP expr POOL
-                | LBRACE expr_list RBRACE
-                | declaration
-                | CASE expr OF case_list ESAC
-                | ISVOID expr
-                | TILDE expr
-                | NOT expr
-                | LPAREN expr RPAREN
-                | NEW TYPE
-                | ID
-                | INTEGER
-                | STRING
-                | TRUE
-                | FALSE 
-                ;
-                
- */                
 expr_list       
                 : expr SEMI expr
                 |
@@ -151,7 +126,6 @@ expr_list
 
 expr_identifier 
                 : LARROW expr
-                /*| LPAREN expr COMMA expr  RPAREN*/
                 | LPAREN expr_comma RPAREN
                 |
                 ;
@@ -182,6 +156,5 @@ assignment
 case_list 
                 : IDENTIFIER COLON TYPE RARROW expr SEMI case_list 
                 |
-                ;    
-
+                ;
 %%
