@@ -11,7 +11,7 @@
 var TokensWithValue = {
     INTEGER     : 0,
     STRING      : 1,
-    INDENTIFIER : 2,
+    IDENTIFIER : 2,
     TYPE        : 3
 };
 
@@ -52,9 +52,9 @@ function CoolLexScanner() {
 	    return "EOF";
 	}
 	*/
+    console.log('CURRENTSTATE: ' + currentState);
 	if (currentState === LexScannerStates.LINE_NUMBER) {
 	    let line = this.getNextLine();	
-        console.log('line:' + line);
 	    if (line === "") return 1;
 	    let lineNumber = parseInt(line);
 	    this.yylloc.first_line = lineNumber;
@@ -65,8 +65,8 @@ function CoolLexScanner() {
 	    let token = this.getNextLine();
 	    if (token === "") return 1;
 	    currentTokenType = token.toUpperCase();
+        console.log('TOKENTYPE: ' + currentTokenType);
         if (TokensWithValue[currentTokenType] === undefined) {
-            console.log(currentTokenType);
             currentState = LexScannerStates.LINE_NUMBER;
             return currentTokenType;
         } else {
@@ -74,18 +74,19 @@ function CoolLexScanner() {
 	        return this.lex();
         }
 	} else if (currentState === LexScannerStates.TOKEN_VALUE) {
-	    return currentTokenType;
 	    if (currentTokenType != "") {
 		let value = this.getNextLine();
 		if (value === "") {
 		    return 1;
-		} else { 		
+		} else { 
+            console.log('VALUE: ' + value);		
 		    this.yytext = value;
 		}
 	    } else {
 		this.yytext = "";
 	    }
 	    currentState = LexScannerStates.LINE_NUMBER;
+        console.log('TOKEN: ' + currentTokenType);
 	    return currentTokenType;
 	} else { 
 	    //throw some kind of exception
